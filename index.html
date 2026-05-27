@@ -1,0 +1,530 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Advancing SVD-based LLM Compression via Layer-Wise Error Model Search">
+  <meta name="keywords" content="LEMS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advancing SVD-based LLM Compression via Layer-Wise Error Model Search</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!--link rel="icon" href="./static/images/favicon.svg"-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size: 46px;">Advancing SVD-based LLM Compression via Layer-Wise Error Model Search</h1>
+          <h1 class="title is-1 publication-title" style="font-size: 26px; margin-top: 40px; margin-bottom: 40px;">ICML 2026</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=YQrGEjQAAAAJ&hl=de" target="_blank">Moritz Thoma</a><sup>1, 2</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Maximilian Groezinger</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://mforstenhaeusler.com" target="_blank">Maximilian Forstenhäusler</a><sup>2, 3</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Zdi2340AAAAJ&hl=en" target="_blank">Emad Aghajanzadeh</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Manoj Rohit Vemparala</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.gla.ac.uk/schools/computing/staff/christosanagnostopoulos/" target="_blank">Christos Anagnostopoulos</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Pierpaolo Mori</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Nael Fasfous</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Alexander Frickenstein</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Daniel Mueller-Gritschneder</a><sup>4</sup>,</span>
+            <span class="author-block">
+              <a href="" target="_blank">Ulf Schlichtmann</a><sup>1</sup>,</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
+              <span class="author-block"><sup>2</sup>BMW Group,</span>
+              <span class="author-block"><sup>3</sup>University of Glasgow,</span>
+              <span class="author-block"><sup>4</sup>TU Wien</span>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top: 10px; margin-bottom: -30px;">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block" style="margin-right: 10px;">
+                <a href="https://icml.cc/virtual/2026/poster/64908" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" style="background-color: #906ba4;">
+                  <span class="icon">
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                    <!--i class="far fa-file-pdf"></i-->
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- span class="link-block" style="margin-right: 10px;">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" style="background-color: #b41a1b;">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span-->
+              <!-- Code Link. -->
+              <span class="link-block" style="margin-right: 10px;">
+                <a href="https://github.com/lems-svd/lems" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!--span class="link-block">
+                <a href="https://wandb.ai/mf-uofg/STaRFormer/reports/STaRFormer--VmlldzoxNDY2Njk3OQ?accessToken=qc2v09qzoebzimmuq4qp0lli5ojwsitynu8ep6aucd333fmki6cbxu0r8j8fj28c" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" style="background-color: #ffcb33;">
+                  <span class="icon">
+                      <i class="fa fa-book"></i>
+                  </span>
+                  <span>Experiments</span>
+                  </a>
+              </span-->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="TL;DR">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Technical TL;DR</h2>
+    <div class="content has-text-justified">
+      <p>
+        We propose <b><span class="dnerf">Lems</span></b>, a rank global allocator driven by a calibrated layer-wise error model of spectral shape, scale, and bias, and <b><span class="dnerf">Kfac-SVD</span></b>, which estimates the Fisher matrix with a token-wise approximation to address the rank bottleneck of prior Fisher-based SVD methods.
+        Across <span class="dnerf">Mistral</span>, <span class="dnerf">Qwen3</span>, and <span class="dnerf">Llama 3</span> families, <span class="dnerf">Lems</span> delivers zero-shot accuracy improvements of up to <b>4.8 p.p.</b> generalizing to 70B parameters, while <span class="dnerf">Kfac-SVD</span> achieves an average perplexity improvement of <b>15%</b>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="video teaser">
+  <div class="container">
+    <div class="default-row">
+      <div class="default-column">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+            <source src="./static/videos/LEMSScaleAnimation.mp4"
+                    type="video/mp4">
+          </video>
+          <h5 class="subtitle has-text-centered">
+            a) <span class="dnerf">Calibrating Layer Sensitivity</span>
+          </h5>
+      </div>
+      <div class="default-column">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+            <source src="./static/videos/LEMSBiasAnimation.mp4"
+                    type="video/mp4">
+          </video>
+          <h5 class="subtitle has-text-centered">
+            b) <span class="dnerf">Solving Error Propagation</span>
+          </h5>
+      </div>
+    </div>
+    <h2 class="subtitle has-text-centered">
+        <span class="dnerf">LEMS Mechanics:</span> the two main operations that drive <span class="dnerf">the global rank allocation</span>.
+      </h2>
+  </div>
+</section>
+<section class="section light-grey-bg">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Low-rank SVD-based compression offers a powerful strategy to 
+          reduce the computational costs of LLMs. However, existing methods 
+          face two key limitations: (i) global rank allocation, where uncalibrated 
+          error proxies fail to capture complex error propagation, and (ii) 
+          decomposition quality, where Fisher-based estimators suffer from severe 
+          rank collapse. In this work, we address these limitations by introducing 
+          <span><b>Layer-wise Error Modeling Search (<span class="dnerf">Lems</span>)</b></span> and <span><b>KFAC-SVD</b></span>.
+          <span class="dnerf">Lems</span> advances rank allocation by introducing a layer-wise error 
+          surrogate that integrates local and global layer importance alongside 
+          a propagation bias, enabling effective global rank allocation via an 
+          ILP formulation. <span class="dnerf">Lems</span> improves decomposition quality by utilizing 
+          token-wise statistics, mitigating the rank deficiency observed in prior 
+          Fisher-based SVD approaches. Across <span class="dnerf">Mistral</span>, 
+          <span class="dnerf">Qwen3</span>, and <span class="dnerf">Llama 3</span> 
+          model families, we show that <span class="dnerf">Lems</span> consistently outperforms 
+          existing search strategies, delivering significant zero-shot accuracy 
+          improvements of up to 4.8 p.p. that generalize to model sizes of 70B 
+          parameters, while <span class="dnerf">Lems</span> achieves an average perplexity improvement of 15%.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+</section>
+
+<section class="section" id="Motivation">
+  <div class="container is-max-desktop content">
+  </div>
+</section>
+
+<section class="section light-grey-bg" id="Results">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Results</h2>
+    
+    <div class="">
+      <h3 class="title">Search Method Comparison</h3>
+      <div class="white-bg hero-img" style="padding:5px; overflow-x: auto;">
+        <h6>Comparison of <b>LEMS</b> against state-of-the-art search baselines across modern LLMs and two compression rates.</h6>
+        <table class="results-table" style="font-size: 12px;">
+          <tr class="light-grey-border-top" style="text-align: center;">
+            <th></th>
+            <th></th>
+            <th colspan="4" style="text-align: center;">Mistral-7B</th>
+            <th colspan="4" style="text-align: center;">Llama3-8B</th>
+            <th colspan="4" style="text-align: center;">Qwen3-8B</th>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <th></th>
+            <th class="light-grey-border-top"><b>Search Method</b></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+          </tr>
+          <tr style="text-align: center;">
+            <td></td>
+            <td style="text-align: left;">Baseline</td>
+            <td>5.25</td><td>8.10</td><td>27.72</td><td>63.95</td>
+            <td>6.14</td><td>9.47</td><td>9.90</td><td>63.34</td>
+            <td>9.71</td><td>15.52</td><td>15.43</td><td>62.03</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td rowspan="7" style="vertical-align: middle;"><b>0.8</b></td>
+            <td style="text-align: left;"><b>uniform</b></td>
+            <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
+            <td>11.44</td><td>52.00</td><td>80.06</td><td>47.69</td>
+            <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ASVD</td>
+            <td>7.20</td><td>22.41</td><td>78.51</td><td>47.81</td>
+            <td>12.92</td><td>63.83</td><td>99.64</td><td>45.95</td>
+            <td>15.70</td><td>43.79</td><td>72.61</td><td>47.72</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM v2</td>
+            <td>7.13</td><td>19.35</td><td>64.84</td><td>52.68</td>
+            <td>11.40</td><td>52.00</td><td>80.38</td><td>47.70</td>
+            <td>12.52</td><td>31.72</td><td>47.44</td><td>53.36</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">MRCS</td>
+            <td><u>7.11</u></td><td>19.13</td><td>68.21</td><td>51.75</td>
+            <td>11.99</td><td>55.89</td><td>83.91</td><td>46.63</td>
+            <td>14.52</td><td>37.38</td><td>53.75</td><td>52.04</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">ARS</td>
+            <td>7.26</td><td><u>11.74</u></td><td><u>47.71</u></td><td><u>54.58</u></td>
+            <td>11.81</td><td><u>20.44</u></td><td><u>28.83</u></td><td><u>54.31</u></td>
+            <td><u>11.58</u></td><td><u>22.41</u></td><td><u>25.05</u></td><td><u>55.66</u></td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ATP</td>
+            <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
+            <td><u>11.07</u></td><td>35.32</td><td>81.32</td><td>51.56</td>
+            <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>LEMS</b></td>
+            <td><b>5.98</b></td><td><b>11.24</b></td><td><b>37.09</b></td><td><b>57.67</b></td>
+            <td><b>8.16</b></td><td><b>17.52</b></td><td><b>22.80</b></td><td><b>55.99</b></td>
+            <td><b>10.38</b></td><td><b>18.32</b></td><td><b>18.32</b></td><td><b>59.28</b></td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td rowspan="7" style="vertical-align: middle;"><b>0.6</b></td>
+            <td style="text-align: left;"><b>uniform</b></td>
+            <td>14.38</td><td>72.05</td><td>208.48</td><td>39.10</td>
+            <td>48.56</td><td>475.36</td><td>1312.50</td><td>34.39</td>
+            <td>21.68</td><td>101.61</td><td>195.85</td><td>39.63</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ASVD</td>
+            <td>16.78</td><td>102.00</td><td>317.89</td><td>35.56</td>
+            <td>75.21</td><td>571.15</td><td>1577.00</td><td>33.98</td>
+            <td>29.22</td><td>122.56</td><td>228.97</td><td>36.09</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM v2</td>
+            <td>14.90</td><td>73.18</td><td>209.30</td><td>39.29</td>
+            <td>47.53</td><td>467.99</td><td>1242.65</td><td>34.43</td>
+            <td>21.42</td><td>96.95</td><td>189.82</td><td>39.74</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">MRCS</td>
+            <td>14.21</td><td>74.05</td><td>253.45</td><td>37.44</td>
+            <td>67.95</td><td>610.37</td><td>1815.12</td><td>33.41</td>
+            <td>38.72</td><td>161.10</td><td>322.90</td><td>36.42</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">ARS</td>
+            <td>19.43</td><td><u>37.09</u></td><td><u>166.87</u></td><td><u>40.83</u></td>
+            <td>28.77</td><td><b>56.55</b></td><td><b>112.03</b></td><td><u>40.57</u></td>
+            <td>29.51</td><td><u>83.91</u></td><td><u>161.10</u></td><td><u>40.72</u></td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ATP</td>
+            <td><u>13.59</u></td><td>60.43</td><td>189.08</td><td>40.24</td>
+            <td><u>25.14</u></td><td>173.51</td><td>467.99</td><td>39.95</td>
+            <td><u>19.47</u></td><td>84.89</td><td>186.88</td><td>40.20</td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>LEMS</b></td>
+            <td><b>10.58</b></td><td><b>34.37</b></td><td><b>124.00</b></td><td><b>45.60</b></td>
+            <td><b>17.86</b></td><td><u>81.01</u></td><td><u>201.28</u></td><td><b>43.09</b></td>
+            <td><b>15.70</b></td><td><b>57.22</b></td><td><b>120.66</b></td><td><b>45.51</b></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="" style="margin-top:50px;">
+      <h3 class="title">SVD Method Comparison</h3>
+      <div class="white-bg hero-img" style="padding:5px; overflow-x: auto;">
+        <h6>Wiki performance and added execution time of individual parts of our method on Llama3-8B and Qwen3-8B.</h6>
+        <table class="results-table" style="font-size: 12px;">
+          <tr class="light-grey-border-top" style="text-align: center;">
+            <th></th>
+            <th></th>
+            <th colspan="4" style="text-align: center;">Mistral-7B</th>
+            <th colspan="4" style="text-align: center;">Llama3-8B</th>
+            <th colspan="4" style="text-align: center;">Qwen3-8B</th>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <th></th>
+            <th class="light-grey-border-top"><b>SVD Method</b></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+          </tr>
+          <tr style="text-align: center;">
+            <td></td>
+            <td style="text-align: left;">Baseline</td>
+            <td>5.25</td><td>8.10</td><td>27.72</td><td>63.96</td>
+            <td>6.14</td><td>9.47</td><td>9.90</td><td>63.33</td>
+            <td>9.71</td><td>15.52</td><td>15.43</td><td>62.04</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td rowspan="8" style="vertical-align: middle;"><b>0.9</b></td>
+            <td style="text-align: left;">FWSVD</td>
+            <td>9.47</td><td>13.75</td><td>58.35</td><td>56.93</td>
+            <td>42.11</td><td>59.96</td><td>69.83</td><td>48.88</td>
+            <td>16.95</td><td>24.75</td><td>31.54</td><td>53.82</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ASVD</td>
+            <td>9.14</td><td>13.41</td><td>49.13</td><td><u>57.30</u></td>
+            <td>65.09</td><td>77.60</td><td>207.67</td><td>47.89</td>
+            <td>20.36</td><td>29.98</td><td>36.37</td><td>51.19</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM</td>
+            <td>6.46</td><td>15.07</td><td>66.12</td><td>56.81</td>
+            <td>10.14</td><td>39.63</td><td>49.91</td><td>52.27</td>
+            <td>12.52</td><td>27.40</td><td>36.66</td><td>55.96</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM v2</td>
+            <td>6.46</td><td>15.07</td><td>66.12</td><td>56.78</td>
+            <td>10.18</td><td>39.71</td><td>50.40</td><td>52.17</td>
+            <td>12.52</td><td>27.45</td><td>36.80</td><td>55.80</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">DoBi-SVD</td>
+            <td>7.11</td><td>15.19</td><td>63.58</td><td>55.17</td>
+            <td>11.22</td><td>34.77</td><td>42.36</td><td>52.98</td>
+            <td>13.46</td><td>28.88</td><td>35.81</td><td>55.48</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">GFWSVD</td>
+            <td>65.86</td><td>98.86</td><td>371.66</td><td>37.03</td>
+            <td>7612.14</td><td>13359.73</td><td>25953.52</td><td>32.39</td>
+            <td>659.97</td><td>691.64</td><td>1646.24</td><td>43.30</td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>KFAC-SVD</b></td>
+            <td><u>6.22</u></td><td><u>13.10</u></td><td><u>44.04</u></td><td>56.92</td>
+            <td><u>8.84</u></td><td><u>25.69</u></td><td><u>32.60</u></td><td><u>54.45</u></td>
+            <td><u>11.51</u></td><td><u>23.76</u></td><td><u>28.00</u></td><td><u>57.07</u></td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>+LEMS</b></td>
+            <td><b>5.37</b></td><td><b>8.49</b></td><td><b>29.86</b></td><td><b>62.77</b></td>
+            <td><b>6.58</b></td><td><b>11.11</b></td><td><b>11.29</b></td><td><b>61.99</b></td>
+            <td><b>9.85</b></td><td><b>16.04</b></td><td><b>15.77</b></td><td><b>62.89</b></td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td rowspan="8" style="vertical-align: middle;"><b>0.7</b></td>
+            <td style="text-align: left;">FWSVD</td>
+            <td>34.84</td><td>50.30</td><td>215.10</td><td>44.24</td>
+            <td>716.39</td><td>837.54</td><td>1939.75</td><td>33.40</td>
+            <td>41.37</td><td>68.75</td><td><u>90.72</u></td><td>42.68</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">ASVD</td>
+            <td>28.16</td><td>42.94</td><td>163.64</td><td><u>46.09</u></td>
+            <td>10989.41</td><td>9399.74</td><td>36032.89</td><td>33.03</td>
+            <td>70.66</td><td>96.95</td><td>131.49</td><td>43.10</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM</td>
+            <td>10.96</td><td>42.60</td><td>169.49</td><td>44.39</td>
+            <td>34.64</td><td>376.04</td><td>600.91</td><td>37.69</td>
+            <td>17.11</td><td>63.09</td><td>136.19</td><td>45.76</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">SVD-LLM v2</td>
+            <td>10.96</td><td>42.60</td><td>169.49</td><td>44.35</td>
+            <td>34.98</td><td>378.99</td><td>615.16</td><td>37.70</td>
+            <td>17.15</td><td>63.33</td><td>136.72</td><td>45.62</td>
+          </tr>
+          <tr class="light-grey-bg" style="text-align: center;">
+            <td style="text-align: left;">DoBi-SVD</td>
+            <td>12.37</td><td>39.71</td><td>170.82</td><td>42.94</td>
+            <td>31.54</td><td>500.12</td><td><u>223.67</u></td><td>38.48</td>
+            <td>18.54</td><td>63.83</td><td>94.34</td><td>46.24</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td style="text-align: left;">GFWSVD</td>
+            <td>3325.50</td><td>3738.96</td><td>4042.78</td><td>31.39</td>
+            <td>104264.63</td><td>199411.34</td><td>106737.20</td><td>31.68</td>
+            <td>173251.57</td><td>49251.13</td><td>61294.02</td><td>32.74</td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>KFAC-SVD</b></td>
+            <td><u>9.29</u></td><td><u>34.64</u></td><td><u>110.72</u></td><td>45.76</td>
+            <td><u>19.43</u></td><td><u>151.34</u></td><td>253.45</td><td><u>40.73</u></td>
+            <td><u>14.69</u></td><td><u>50.00</u></td><td>93.97</td><td><u>46.78</u></td>
+          </tr>
+          <tr style="text-align: center; background-color: #e6f3e6;">
+            <td style="text-align: left;"><b>+LEMS</b></td>
+            <td><b>7.42</b></td><td><b>18.25</b></td><td><b>67.95</b></td><td><b>51.52</b></td>
+            <td><b>11.07</b></td><td><b>33.51</b></td><td><b>65.09</b></td><td><b>49.39</b></td>
+            <td><b>11.81</b></td><td><b>28.33</b></td><td><b>37.97</b></td><td><b>53.80</b></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+</section>
+
+<!-- section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Ablation Studies</h2>
+    <div  class="" style="margin-top:50px;"> 
+      <div class="", style="margin-top:20px; padding: 5px; padding-bottom:0px">
+        <div class="white-bg hero-img", style="padding:5px">
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section-->
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{thoma_advancing_2026,
+      location = {Seoul, South Korea},
+      title = {Advancing {SVD}-based {LLM} Compression via Layer-Wise Error Model Search},
+      url = {https://openreview.net/forum?id=IjIgNPFuCt},
+      abstract = {Low-rank {SVD}-based compression offers a powerful strategy to reduce the computational costs of Large language models ({LLMs}); however, existing methods commonly encounter two recurring obstacles: (i) global rank allocation, where uncalibrated error proxies fail to account for complex error propagation, and (ii) decomposition quality, where Fisher-based estimators suffer from severe rank collapse. In this work, we address these limitations by presenting Layer-wise Error Modeling Search ({LEMS}) and {KFAC}-{SVD}. {LEMS} advances rank allocation by introducing a layer-wise error surrogate that integrates both local and global layer importance alongside a propagation bias, allowing us to determine global rank configurations efficiently as an Integer Linear Program ({ILP}). Simultaneously, {KFAC}-{SVD} improves decomposition quality by utilizing token-wise statistics, preventing the rank deficiency observed in prior Fisher-based {SVD}. We demonstrate across Mistral, Qwen3, and Llama-3 families that {KFAC}-{SVD} achieves an average perplexity improvements of 15\%, while {LEMS} consistently outperforms existing search strategies, delivering significant zero-shot accuracy improvements of up to 4.7 p.p. that generalize to scales of 70B parameters. Code is made available in the Supplement.},
+      eventtitle = {Forty-third International Conference on Machine Learning},
+      author = {Thoma, Moritz and Groezinger, Maximilian and Forstenhäusler, Maximilian and Aghajanzadeh, Emad and Vemparala, Manoj Rohit and Anagnostopoulos, Christos and Mori, Pierpaolo and Fasfous, Nael and Frickenstein, Alexander and Mueller-Gritschneder, Daniel and Schlichtmann, Ulf},
+      urldate = {2026-05-27},
+      date = {2026-04-30},
+      langid = {english},
+    }</code></pre>
+  </div>
+</section>
+
+<footer class="footer light-grey-bg">
+  <div class="container">
+    <!--div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div-->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+        <p>This website was adopted from <a
+              href="https://nerfies.github.io/">Nerfies website</a>. and is licensed under a 
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to the <a
+              href="https://nerfies.github.io/">original page and source code</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
