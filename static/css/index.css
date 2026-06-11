@@ -55,6 +55,10 @@ body {
   box-shadow: 5px 5px 5px 5px rgb(222, 222, 222);
 }
 
+.metric-card {
+  box-shadow: 2px 2px 4px 2px rgb(235, 235, 235);
+}
+
 
 
 

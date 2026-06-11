@@ -86,15 +86,16 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <!-- span class="link-block" style="margin-right: 10px;">
-                <a href="" target="_blank"
+              <span class="link-block" style="margin-right: 10px;">
+                <a href="https://openreview.net/forum?id=IjIgNPFuCt" target="_blank"
                    class="external-link button is-normal is-rounded is-dark" style="background-color: #b41a1b;">
                   <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <!-- i class="ai ai-arxiv"></i-->
+                      <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
                   </span>
-                  <span>arXiv</span>
+                  <span>OpenReview</span>
                 </a>
-              </span-->
+              </span>
               <!-- Code Link. -->
               <span class="link-block" style="margin-right: 10px;">
                 <a href="https://github.com/lems-svd/lems" target="_blank"
@@ -199,274 +200,369 @@
   </div>
 </section>
 
-<section class="section" id="Motivation">
+<section class="section" id="Results-TLDR">
   <div class="container is-max-desktop content">
+    <h2 class="title">Results TL;DR 🏁 </h2>
+    <div class="default-row" style="align-items: stretch;">
+      <!-- Left card: 3 stacked metric cards -->
+      <div class="default-column" style="display: flex;">
+        <div class="white-bg hero-img" style="padding: 20px; background: #fff; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+          <div class="metric-card" style="border: 2px solid #b8ddd8; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+            <div style="font-size: 2rem; font-weight: bold; color: #55beb0;">15%</div>
+            <div style="font-size: 1rem; color: #333;">Average WikiText2 PPL gain over SVD baselines.</div>
+          </div>
+          <div class="metric-card" style="border: 2px solid #b8ddd8; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+            <div style="font-size: 2rem; font-weight: bold; color: #55beb0;">+1.7-4.8 p.p.</div>
+            <div style="font-size: 1rem; color: #333;">Zero-shot accuracy over 2<sup>nd</sup>-best search</div>
+          </div>
+          <div class="metric-card" style="border: 2px solid #b8ddd8; border-radius: 8px; padding: 20px;">
+            <div style="font-size: 2rem; font-weight: bold; color: #55beb0;">70B</div>
+            <div style="font-size: 1rem; color: #333;">Generalizes from 8B up to Llama 3.1-70B</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right card: Bar chart -->
+      <div class="default-column" style="display: flex;">
+        <div class="white-bg hero-img" style="padding: 20px; background: #fff; display: flex; flex-direction: column; flex: 1;">
+          <h3 style="color: #2a9d8f; font-weight: bold; margin-bottom: 5px;">Why LEMS works</h3>
+          <p style="font-size: 1rem; margin-bottom: 10px;">How the LEMS components contribute to the perplexity score for Llama 3-8B (0.6, WikiText2 ↓).</p>
+          
+          <!-- SVG Bar Chart -->
+          <div style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 280px;">
+            <svg viewBox="0 0 380 300" style="max-width: 100%; height: auto;">
+              <!-- Y-axis label (rotated) -->
+              <text x="12" y="130" transform="rotate(-90, 12, 130)" font-size="12" fill="#333" text-anchor="middle">Perplexity (↓)</text>
+              
+              <!-- Horizontal grid lines (light gray) -->
+              <line x1="50" y1="20" x2="360" y2="20" stroke="#ddd" stroke-width="1"/>
+              <line x1="50" y1="64" x2="360" y2="64" stroke="#ddd" stroke-width="1"/>
+              <line x1="50" y1="108" x2="360" y2="108" stroke="#ddd" stroke-width="1"/>
+              <line x1="50" y1="152" x2="360" y2="152" stroke="#ddd" stroke-width="1"/>
+              <line x1="50" y1="196" x2="360" y2="196" stroke="#ddd" stroke-width="1"/>
+              
+              <!-- Y-axis line -->
+              <line x1="50" y1="20" x2="50" y2="240" stroke="#333" stroke-width="1"/>
+              
+              <!-- Y-axis ticks and labels -->
+              <line x1="45" y1="20" x2="50" y2="20" stroke="#333" stroke-width="1"/>
+              <text x="40" y="24" font-size="11" fill="#333" text-anchor="end">60</text>
+              
+              <line x1="45" y1="64" x2="50" y2="64" stroke="#333" stroke-width="1"/>
+              <text x="40" y="68" font-size="11" fill="#333" text-anchor="end">50</text>
+              
+              <line x1="45" y1="108" x2="50" y2="108" stroke="#333" stroke-width="1"/>
+              <text x="40" y="112" font-size="11" fill="#333" text-anchor="end">40</text>
+              
+              <line x1="45" y1="152" x2="50" y2="152" stroke="#333" stroke-width="1"/>
+              <text x="40" y="156" font-size="11" fill="#333" text-anchor="end">30</text>
+              
+              <line x1="45" y1="196" x2="50" y2="196" stroke="#333" stroke-width="1"/>
+              <text x="40" y="200" font-size="11" fill="#333" text-anchor="end">20</text>
+              
+              <line x1="45" y1="240" x2="50" y2="240" stroke="#333" stroke-width="1"/>
+              <text x="40" y="244" font-size="11" fill="#333" text-anchor="end">10</text>
+              
+              <!-- X-axis line -->
+              <line x1="50" y1="240" x2="360" y2="240" stroke="#333" stroke-width="1"/>
+              
+              <!-- Bar 1: uniform (49) -->
+              <rect x="70" y="68.4" width="50" height="171.6" fill="#2a9d8f"/>
+              <text x="95" y="62" font-size="15" fill="#333" text-anchor="middle" font-weight="bold">49</text>
+              <text x="95" y="258" font-size="10" fill="#333" text-anchor="middle">uniform</text>
+              
+              <!-- Bar 2: + ILP energy (47) -->
+              <rect x="145" y="77.2" width="50" height="162.8" fill="#2a9d8f"/>
+              <text x="170" y="71" font-size="15" fill="#333" text-anchor="middle" font-weight="bold">47</text>
+              <text x="170" y="258" font-size="10" fill="#333" text-anchor="middle">+ ILP energy</text>
+              <text x="170" y="270" font-size="10" fill="#333" text-anchor="middle">(no calib)</text>
+              
+              <!-- Bar 3: + KL calib (38) -->
+              <rect x="220" y="116.8" width="50" height="123.2" fill="#2a9d8f"/>
+              <text x="245" y="110" font-size="15" fill="#333" text-anchor="middle" font-weight="bold">38</text>
+              <text x="245" y="258" font-size="10" fill="#333" text-anchor="middle">+ KL calib.</text>
+              
+              <!-- Bar 4: + cross-layer bias (18) -->
+              <rect x="295" y="204.8" width="50" height="35.2" fill="#2a9d8f"/>
+              <text x="320" y="198" font-size="15" fill="#333" text-anchor="middle" font-weight="bold">18</text>
+              <text x="320" y="258" font-size="10" fill="#333" text-anchor="middle">+ cross-</text>
+              <text x="320" y="270" font-size="10" fill="#333" text-anchor="middle">layer bias</text>
+            </svg>
+          </div>
+          
+          <p style="margin-top: 10px; font-size: 1rem;">Each component contributes to lower perplexity.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section light-grey-bg" id="Results">
   <div class="container is-max-desktop content">
-    <h2 class="title">Results</h2>
+    <h2 class="title">Extended Results</h2>
     
     <div class="">
       <h3 class="title">Search Method Comparison</h3>
-      <div class="white-bg hero-img" style="padding:5px; overflow-x: auto;">
-        <h6>Comparison of <b>LEMS</b> against state-of-the-art search baselines across modern LLMs and two compression rates.</h6>
-        <table class="results-table" style="font-size: 12px;">
-          <tr class="light-grey-border-top" style="text-align: center;">
-            <th></th>
-            <th></th>
-            <th colspan="4" style="text-align: center;">Mistral-7B</th>
-            <th colspan="4" style="text-align: center;">Llama3-8B</th>
-            <th colspan="4" style="text-align: center;">Qwen3-8B</th>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <th></th>
-            <th class="light-grey-border-top"><b>Search Method</b></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-          </tr>
-          <tr style="text-align: center;">
-            <td></td>
-            <td style="text-align: left;">Baseline</td>
-            <td>5.25</td><td>8.10</td><td>27.72</td><td>63.95</td>
-            <td>6.14</td><td>9.47</td><td>9.90</td><td>63.34</td>
-            <td>9.71</td><td>15.52</td><td>15.43</td><td>62.03</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td rowspan="7" style="vertical-align: middle;"><b>0.8</b></td>
-            <td style="text-align: left;"><b>uniform</b></td>
-            <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
-            <td>11.44</td><td>52.00</td><td>80.06</td><td>47.69</td>
-            <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ASVD</td>
-            <td>7.20</td><td>22.41</td><td>78.51</td><td>47.81</td>
-            <td>12.92</td><td>63.83</td><td>99.64</td><td>45.95</td>
-            <td>15.70</td><td>43.79</td><td>72.61</td><td>47.72</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM v2</td>
-            <td>7.13</td><td>19.35</td><td>64.84</td><td>52.68</td>
-            <td>11.40</td><td>52.00</td><td>80.38</td><td>47.70</td>
-            <td>12.52</td><td>31.72</td><td>47.44</td><td>53.36</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">MRCS</td>
-            <td><u>7.11</u></td><td>19.13</td><td>68.21</td><td>51.75</td>
-            <td>11.99</td><td>55.89</td><td>83.91</td><td>46.63</td>
-            <td>14.52</td><td>37.38</td><td>53.75</td><td>52.04</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">ARS</td>
-            <td>7.26</td><td><u>11.74</u></td><td><u>47.71</u></td><td><u>54.58</u></td>
-            <td>11.81</td><td><u>20.44</u></td><td><u>28.83</u></td><td><u>54.31</u></td>
-            <td><u>11.58</u></td><td><u>22.41</u></td><td><u>25.05</u></td><td><u>55.66</u></td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ATP</td>
-            <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
-            <td><u>11.07</u></td><td>35.32</td><td>81.32</td><td>51.56</td>
-            <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>LEMS</b></td>
-            <td><b>5.98</b></td><td><b>11.24</b></td><td><b>37.09</b></td><td><b>57.67</b></td>
-            <td><b>8.16</b></td><td><b>17.52</b></td><td><b>22.80</b></td><td><b>55.99</b></td>
-            <td><b>10.38</b></td><td><b>18.32</b></td><td><b>18.32</b></td><td><b>59.28</b></td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td rowspan="7" style="vertical-align: middle;"><b>0.6</b></td>
-            <td style="text-align: left;"><b>uniform</b></td>
-            <td>14.38</td><td>72.05</td><td>208.48</td><td>39.10</td>
-            <td>48.56</td><td>475.36</td><td>1312.50</td><td>34.39</td>
-            <td>21.68</td><td>101.61</td><td>195.85</td><td>39.63</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ASVD</td>
-            <td>16.78</td><td>102.00</td><td>317.89</td><td>35.56</td>
-            <td>75.21</td><td>571.15</td><td>1577.00</td><td>33.98</td>
-            <td>29.22</td><td>122.56</td><td>228.97</td><td>36.09</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM v2</td>
-            <td>14.90</td><td>73.18</td><td>209.30</td><td>39.29</td>
-            <td>47.53</td><td>467.99</td><td>1242.65</td><td>34.43</td>
-            <td>21.42</td><td>96.95</td><td>189.82</td><td>39.74</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">MRCS</td>
-            <td>14.21</td><td>74.05</td><td>253.45</td><td>37.44</td>
-            <td>67.95</td><td>610.37</td><td>1815.12</td><td>33.41</td>
-            <td>38.72</td><td>161.10</td><td>322.90</td><td>36.42</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">ARS</td>
-            <td>19.43</td><td><u>37.09</u></td><td><u>166.87</u></td><td><u>40.83</u></td>
-            <td>28.77</td><td><b>56.55</b></td><td><b>112.03</b></td><td><u>40.57</u></td>
-            <td>29.51</td><td><u>83.91</u></td><td><u>161.10</u></td><td><u>40.72</u></td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ATP</td>
-            <td><u>13.59</u></td><td>60.43</td><td>189.08</td><td>40.24</td>
-            <td><u>25.14</u></td><td>173.51</td><td>467.99</td><td>39.95</td>
-            <td><u>19.47</u></td><td>84.89</td><td>186.88</td><td>40.20</td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>LEMS</b></td>
-            <td><b>10.58</b></td><td><b>34.37</b></td><td><b>124.00</b></td><td><b>45.60</b></td>
-            <td><b>17.86</b></td><td><u>81.01</u></td><td><u>201.28</u></td><td><b>43.09</b></td>
-            <td><b>15.70</b></td><td><b>57.22</b></td><td><b>120.66</b></td><td><b>45.51</b></td>
-          </tr>
-        </table>
+      <div class="white-bg hero-img" style="padding: 20px">
+        <h6>Table 1: Comparison of <b>LEMS</b> against state-of-the-art search baselines across modern LLMs and two compression rates.</h6>
+        <div style="overflow-x: auto;">
+          <table class="results-table" style="font-size: 12px;">
+            <tr class="light-grey-border-top" style="text-align: center;">
+              <th></th>
+              <th></th>
+              <th colspan="4" style="text-align: center;">Mistral-7B</th>
+              <th colspan="4" style="text-align: center;">Llama3-8B</th>
+              <th colspan="4" style="text-align: center;">Qwen3-8B</th>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <th></th>
+              <th class="light-grey-border-top"><b>Search Method</b></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            </tr>
+            <tr style="text-align: center;">
+              <td></td>
+              <td style="text-align: left;">Baseline</td>
+              <td>5.25</td><td>8.10</td><td>27.72</td><td>63.95</td>
+              <td>6.14</td><td>9.47</td><td>9.90</td><td>63.34</td>
+              <td>9.71</td><td>15.52</td><td>15.43</td><td>62.03</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td rowspan="7" style="vertical-align: middle;"><b>0.8</b></td>
+              <td style="text-align: left;"><b>uniform</b></td>
+              <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
+              <td>11.44</td><td>52.00</td><td>80.06</td><td>47.69</td>
+              <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ASVD</td>
+              <td>7.20</td><td>22.41</td><td>78.51</td><td>47.81</td>
+              <td>12.92</td><td>63.83</td><td>99.64</td><td>45.95</td>
+              <td>15.70</td><td>43.79</td><td>72.61</td><td>47.72</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM v2</td>
+              <td>7.13</td><td>19.35</td><td>64.84</td><td>52.68</td>
+              <td>11.40</td><td>52.00</td><td>80.38</td><td>47.70</td>
+              <td>12.52</td><td>31.72</td><td>47.44</td><td>53.36</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">MRCS</td>
+              <td><u>7.11</u></td><td>19.13</td><td>68.21</td><td>51.75</td>
+              <td>11.99</td><td>55.89</td><td>83.91</td><td>46.63</td>
+              <td>14.52</td><td>37.38</td><td>53.75</td><td>52.04</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">ARS</td>
+              <td>7.26</td><td><u>11.74</u></td><td><u>47.71</u></td><td><u>54.58</u></td>
+              <td>11.81</td><td><u>20.44</u></td><td><u>28.83</u></td><td><u>54.31</u></td>
+              <td><u>11.58</u></td><td><u>22.41</u></td><td><u>25.05</u></td><td><u>55.66</u></td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ATP</td>
+              <td>7.14</td><td>19.43</td><td>64.84</td><td>52.35</td>
+              <td><u>11.07</u></td><td>35.32</td><td>81.32</td><td>51.56</td>
+              <td>12.52</td><td>31.85</td><td>47.25</td><td>53.56</td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>LEMS</b></td>
+              <td><b>5.98</b></td><td><b>11.24</b></td><td><b>37.09</b></td><td><b>57.67</b></td>
+              <td><b>8.16</b></td><td><b>17.52</b></td><td><b>22.80</b></td><td><b>55.99</b></td>
+              <td><b>10.38</b></td><td><b>18.32</b></td><td><b>18.32</b></td><td><b>59.28</b></td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td rowspan="7" style="vertical-align: middle;"><b>0.6</b></td>
+              <td style="text-align: left;"><b>uniform</b></td>
+              <td>14.38</td><td>72.05</td><td>208.48</td><td>39.10</td>
+              <td>48.56</td><td>475.36</td><td>1312.50</td><td>34.39</td>
+              <td>21.68</td><td>101.61</td><td>195.85</td><td>39.63</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ASVD</td>
+              <td>16.78</td><td>102.00</td><td>317.89</td><td>35.56</td>
+              <td>75.21</td><td>571.15</td><td>1577.00</td><td>33.98</td>
+              <td>29.22</td><td>122.56</td><td>228.97</td><td>36.09</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM v2</td>
+              <td>14.90</td><td>73.18</td><td>209.30</td><td>39.29</td>
+              <td>47.53</td><td>467.99</td><td>1242.65</td><td>34.43</td>
+              <td>21.42</td><td>96.95</td><td>189.82</td><td>39.74</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">MRCS</td>
+              <td>14.21</td><td>74.05</td><td>253.45</td><td>37.44</td>
+              <td>67.95</td><td>610.37</td><td>1815.12</td><td>33.41</td>
+              <td>38.72</td><td>161.10</td><td>322.90</td><td>36.42</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">ARS</td>
+              <td>19.43</td><td><u>37.09</u></td><td><u>166.87</u></td><td><u>40.83</u></td>
+              <td>28.77</td><td><b>56.55</b></td><td><b>112.03</b></td><td><u>40.57</u></td>
+              <td>29.51</td><td><u>83.91</u></td><td><u>161.10</u></td><td><u>40.72</u></td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ATP</td>
+              <td><u>13.59</u></td><td>60.43</td><td>189.08</td><td>40.24</td>
+              <td><u>25.14</u></td><td>173.51</td><td>467.99</td><td>39.95</td>
+              <td><u>19.47</u></td><td>84.89</td><td>186.88</td><td>40.20</td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>LEMS</b></td>
+              <td><b>10.58</b></td><td><b>34.37</b></td><td><b>124.00</b></td><td><b>45.60</b></td>
+              <td><b>17.86</b></td><td><u>81.01</u></td><td><u>201.28</u></td><td><b>43.09</b></td>
+              <td><b>15.70</b></td><td><b>57.22</b></td><td><b>120.66</b></td><td><b>45.51</b></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
     <div class="" style="margin-top:50px;">
       <h3 class="title">SVD Method Comparison</h3>
-      <div class="white-bg hero-img" style="padding:5px; overflow-x: auto;">
-        <h6>Wiki performance and added execution time of individual parts of our method on Llama3-8B and Qwen3-8B.</h6>
-        <table class="results-table" style="font-size: 12px;">
-          <tr class="light-grey-border-top" style="text-align: center;">
-            <th></th>
-            <th></th>
-            <th colspan="4" style="text-align: center;">Mistral-7B</th>
-            <th colspan="4" style="text-align: center;">Llama3-8B</th>
-            <th colspan="4" style="text-align: center;">Qwen3-8B</th>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <th></th>
-            <th class="light-grey-border-top"><b>SVD Method</b></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-            <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
-            <th class="light-grey-border-top">C4<span>&#8595;</span></th>
-            <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
-            <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
-          </tr>
-          <tr style="text-align: center;">
-            <td></td>
-            <td style="text-align: left;">Baseline</td>
-            <td>5.25</td><td>8.10</td><td>27.72</td><td>63.96</td>
-            <td>6.14</td><td>9.47</td><td>9.90</td><td>63.33</td>
-            <td>9.71</td><td>15.52</td><td>15.43</td><td>62.04</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td rowspan="8" style="vertical-align: middle;"><b>0.9</b></td>
-            <td style="text-align: left;">FWSVD</td>
-            <td>9.47</td><td>13.75</td><td>58.35</td><td>56.93</td>
-            <td>42.11</td><td>59.96</td><td>69.83</td><td>48.88</td>
-            <td>16.95</td><td>24.75</td><td>31.54</td><td>53.82</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ASVD</td>
-            <td>9.14</td><td>13.41</td><td>49.13</td><td><u>57.30</u></td>
-            <td>65.09</td><td>77.60</td><td>207.67</td><td>47.89</td>
-            <td>20.36</td><td>29.98</td><td>36.37</td><td>51.19</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM</td>
-            <td>6.46</td><td>15.07</td><td>66.12</td><td>56.81</td>
-            <td>10.14</td><td>39.63</td><td>49.91</td><td>52.27</td>
-            <td>12.52</td><td>27.40</td><td>36.66</td><td>55.96</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM v2</td>
-            <td>6.46</td><td>15.07</td><td>66.12</td><td>56.78</td>
-            <td>10.18</td><td>39.71</td><td>50.40</td><td>52.17</td>
-            <td>12.52</td><td>27.45</td><td>36.80</td><td>55.80</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">DoBi-SVD</td>
-            <td>7.11</td><td>15.19</td><td>63.58</td><td>55.17</td>
-            <td>11.22</td><td>34.77</td><td>42.36</td><td>52.98</td>
-            <td>13.46</td><td>28.88</td><td>35.81</td><td>55.48</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">GFWSVD</td>
-            <td>65.86</td><td>98.86</td><td>371.66</td><td>37.03</td>
-            <td>7612.14</td><td>13359.73</td><td>25953.52</td><td>32.39</td>
-            <td>659.97</td><td>691.64</td><td>1646.24</td><td>43.30</td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>KFAC-SVD</b></td>
-            <td><u>6.22</u></td><td><u>13.10</u></td><td><u>44.04</u></td><td>56.92</td>
-            <td><u>8.84</u></td><td><u>25.69</u></td><td><u>32.60</u></td><td><u>54.45</u></td>
-            <td><u>11.51</u></td><td><u>23.76</u></td><td><u>28.00</u></td><td><u>57.07</u></td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>+LEMS</b></td>
-            <td><b>5.37</b></td><td><b>8.49</b></td><td><b>29.86</b></td><td><b>62.77</b></td>
-            <td><b>6.58</b></td><td><b>11.11</b></td><td><b>11.29</b></td><td><b>61.99</b></td>
-            <td><b>9.85</b></td><td><b>16.04</b></td><td><b>15.77</b></td><td><b>62.89</b></td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td rowspan="8" style="vertical-align: middle;"><b>0.7</b></td>
-            <td style="text-align: left;">FWSVD</td>
-            <td>34.84</td><td>50.30</td><td>215.10</td><td>44.24</td>
-            <td>716.39</td><td>837.54</td><td>1939.75</td><td>33.40</td>
-            <td>41.37</td><td>68.75</td><td><u>90.72</u></td><td>42.68</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">ASVD</td>
-            <td>28.16</td><td>42.94</td><td>163.64</td><td><u>46.09</u></td>
-            <td>10989.41</td><td>9399.74</td><td>36032.89</td><td>33.03</td>
-            <td>70.66</td><td>96.95</td><td>131.49</td><td>43.10</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM</td>
-            <td>10.96</td><td>42.60</td><td>169.49</td><td>44.39</td>
-            <td>34.64</td><td>376.04</td><td>600.91</td><td>37.69</td>
-            <td>17.11</td><td>63.09</td><td>136.19</td><td>45.76</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">SVD-LLM v2</td>
-            <td>10.96</td><td>42.60</td><td>169.49</td><td>44.35</td>
-            <td>34.98</td><td>378.99</td><td>615.16</td><td>37.70</td>
-            <td>17.15</td><td>63.33</td><td>136.72</td><td>45.62</td>
-          </tr>
-          <tr class="light-grey-bg" style="text-align: center;">
-            <td style="text-align: left;">DoBi-SVD</td>
-            <td>12.37</td><td>39.71</td><td>170.82</td><td>42.94</td>
-            <td>31.54</td><td>500.12</td><td><u>223.67</u></td><td>38.48</td>
-            <td>18.54</td><td>63.83</td><td>94.34</td><td>46.24</td>
-          </tr>
-          <tr style="text-align: center;">
-            <td style="text-align: left;">GFWSVD</td>
-            <td>3325.50</td><td>3738.96</td><td>4042.78</td><td>31.39</td>
-            <td>104264.63</td><td>199411.34</td><td>106737.20</td><td>31.68</td>
-            <td>173251.57</td><td>49251.13</td><td>61294.02</td><td>32.74</td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>KFAC-SVD</b></td>
-            <td><u>9.29</u></td><td><u>34.64</u></td><td><u>110.72</u></td><td>45.76</td>
-            <td><u>19.43</u></td><td><u>151.34</u></td><td>253.45</td><td><u>40.73</u></td>
-            <td><u>14.69</u></td><td><u>50.00</u></td><td>93.97</td><td><u>46.78</u></td>
-          </tr>
-          <tr style="text-align: center; background-color: #e6f3e6;">
-            <td style="text-align: left;"><b>+LEMS</b></td>
-            <td><b>7.42</b></td><td><b>18.25</b></td><td><b>67.95</b></td><td><b>51.52</b></td>
-            <td><b>11.07</b></td><td><b>33.51</b></td><td><b>65.09</b></td><td><b>49.39</b></td>
-            <td><b>11.81</b></td><td><b>28.33</b></td><td><b>37.97</b></td><td><b>53.80</b></td>
-          </tr>
-        </table>
+      <div class="white-bg hero-img" style="padding: 20px">
+        <h6>Table 2: Wiki performance and added execution time of individual parts of our method on Llama3-8B and Qwen3-8B.</h6>
+        <div style="overflow-x: auto;">
+          <table class="results-table" style="font-size: 12px;">
+            <tr class="light-grey-border-top" style="text-align: center;">
+              <th></th>
+              <th></th>
+              <th colspan="4" style="text-align: center;">Mistral-7B</th>
+              <th colspan="4" style="text-align: center;">Llama3-8B</th>
+              <th colspan="4" style="text-align: center;">Qwen3-8B</th>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <th></th>
+              <th class="light-grey-border-top"><b>SVD Method</b></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+              <th class="light-grey-border-top">Wiki<span>&#8595;</span></th>
+              <th class="light-grey-border-top">C4<span>&#8595;</span></th>
+              <th class="light-grey-border-top">PTB<span>&#8595;</span></th>
+              <th class="light-grey-border-top">Acc<span>&#8593;</span></th>
+            </tr>
+            <tr style="text-align: center;">
+              <td></td>
+              <td style="text-align: left;">Baseline</td>
+              <td>5.25</td><td>8.10</td><td>27.72</td><td>63.96</td>
+              <td>6.14</td><td>9.47</td><td>9.90</td><td>63.33</td>
+              <td>9.71</td><td>15.52</td><td>15.43</td><td>62.04</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td rowspan="8" style="vertical-align: middle;"><b>0.9</b></td>
+              <td style="text-align: left;">FWSVD</td>
+              <td>9.47</td><td>13.75</td><td>58.35</td><td>56.93</td>
+              <td>42.11</td><td>59.96</td><td>69.83</td><td>48.88</td>
+              <td>16.95</td><td>24.75</td><td>31.54</td><td>53.82</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ASVD</td>
+              <td>9.14</td><td>13.41</td><td>49.13</td><td><u>57.30</u></td>
+              <td>65.09</td><td>77.60</td><td>207.67</td><td>47.89</td>
+              <td>20.36</td><td>29.98</td><td>36.37</td><td>51.19</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM</td>
+              <td>6.46</td><td>15.07</td><td>66.12</td><td>56.81</td>
+              <td>10.14</td><td>39.63</td><td>49.91</td><td>52.27</td>
+              <td>12.52</td><td>27.40</td><td>36.66</td><td>55.96</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM v2</td>
+              <td>6.46</td><td>15.07</td><td>66.12</td><td>56.78</td>
+              <td>10.18</td><td>39.71</td><td>50.40</td><td>52.17</td>
+              <td>12.52</td><td>27.45</td><td>36.80</td><td>55.80</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">DoBi-SVD</td>
+              <td>7.11</td><td>15.19</td><td>63.58</td><td>55.17</td>
+              <td>11.22</td><td>34.77</td><td>42.36</td><td>52.98</td>
+              <td>13.46</td><td>28.88</td><td>35.81</td><td>55.48</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">GFWSVD</td>
+              <td>65.86</td><td>98.86</td><td>371.66</td><td>37.03</td>
+              <td>7612.14</td><td>13359.73</td><td>25953.52</td><td>32.39</td>
+              <td>659.97</td><td>691.64</td><td>1646.24</td><td>43.30</td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>KFAC-SVD</b></td>
+              <td><u>6.22</u></td><td><u>13.10</u></td><td><u>44.04</u></td><td>56.92</td>
+              <td><u>8.84</u></td><td><u>25.69</u></td><td><u>32.60</u></td><td><u>54.45</u></td>
+              <td><u>11.51</u></td><td><u>23.76</u></td><td><u>28.00</u></td><td><u>57.07</u></td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>+LEMS</b></td>
+              <td><b>5.37</b></td><td><b>8.49</b></td><td><b>29.86</b></td><td><b>62.77</b></td>
+              <td><b>6.58</b></td><td><b>11.11</b></td><td><b>11.29</b></td><td><b>61.99</b></td>
+              <td><b>9.85</b></td><td><b>16.04</b></td><td><b>15.77</b></td><td><b>62.89</b></td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td rowspan="8" style="vertical-align: middle;"><b>0.7</b></td>
+              <td style="text-align: left;">FWSVD</td>
+              <td>34.84</td><td>50.30</td><td>215.10</td><td>44.24</td>
+              <td>716.39</td><td>837.54</td><td>1939.75</td><td>33.40</td>
+              <td>41.37</td><td>68.75</td><td><u>90.72</u></td><td>42.68</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">ASVD</td>
+              <td>28.16</td><td>42.94</td><td>163.64</td><td><u>46.09</u></td>
+              <td>10989.41</td><td>9399.74</td><td>36032.89</td><td>33.03</td>
+              <td>70.66</td><td>96.95</td><td>131.49</td><td>43.10</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM</td>
+              <td>10.96</td><td>42.60</td><td>169.49</td><td>44.39</td>
+              <td>34.64</td><td>376.04</td><td>600.91</td><td>37.69</td>
+              <td>17.11</td><td>63.09</td><td>136.19</td><td>45.76</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">SVD-LLM v2</td>
+              <td>10.96</td><td>42.60</td><td>169.49</td><td>44.35</td>
+              <td>34.98</td><td>378.99</td><td>615.16</td><td>37.70</td>
+              <td>17.15</td><td>63.33</td><td>136.72</td><td>45.62</td>
+            </tr>
+            <tr class="light-grey-bg" style="text-align: center;">
+              <td style="text-align: left;">DoBi-SVD</td>
+              <td>12.37</td><td>39.71</td><td>170.82</td><td>42.94</td>
+              <td>31.54</td><td>500.12</td><td><u>223.67</u></td><td>38.48</td>
+              <td>18.54</td><td>63.83</td><td>94.34</td><td>46.24</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td style="text-align: left;">GFWSVD</td>
+              <td>3325.50</td><td>3738.96</td><td>4042.78</td><td>31.39</td>
+              <td>104264.63</td><td>199411.34</td><td>106737.20</td><td>31.68</td>
+              <td>173251.57</td><td>49251.13</td><td>61294.02</td><td>32.74</td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>KFAC-SVD</b></td>
+              <td><u>9.29</u></td><td><u>34.64</u></td><td><u>110.72</u></td><td>45.76</td>
+              <td><u>19.43</u></td><td><u>151.34</u></td><td>253.45</td><td><u>40.73</u></td>
+              <td><u>14.69</u></td><td><u>50.00</u></td><td>93.97</td><td><u>46.78</u></td>
+            </tr>
+            <tr style="text-align: center; background-color: #e6f3e6;">
+              <td style="text-align: left;"><b>+LEMS</b></td>
+              <td><b>7.42</b></td><td><b>18.25</b></td><td><b>67.95</b></td><td><b>51.52</b></td>
+              <td><b>11.07</b></td><td><b>33.51</b></td><td><b>65.09</b></td><td><b>49.39</b></td>
+              <td><b>11.81</b></td><td><b>28.33</b></td><td><b>37.97</b></td><td><b>53.80</b></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
